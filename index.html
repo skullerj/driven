@@ -1,0 +1,123 @@
+    <!DOCTYPE html>
+    <html>
+        <head>
+            <title></title>
+            <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+            <script src="bower_components/jquery-1.11.2.min.js"></script>
+            <script src="bower_components/webcomponentsjs/webcomponents.js"></script>
+            <script src="js/pilots.js"></script>
+            <link rel = "import" href = "elements.html">
+            <style type = "text/css">
+            </style>
+        </head>
+    <body unresolved>
+        <style> 
+                 html,body {
+                    height: 100%;
+                    margin: 0;
+                    background-color: #E5E5E5;
+                    font-family: 'RobotoDraft', sans-serif;
+                    -webkit-tap-highlight-color: rgba(0,0,0,0);
+                }
+          :host {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            box-sizing: border-box;
+          }
+          #core_scaffold {
+            position: absolute;
+            top: 0px;
+            right: 0px;
+            bottom: 0px;
+            left: 0px;
+            color:black;
+            background-color: white;
+          }
+
+          #core_header_panel {
+            background-color: #F6F5F1;
+          }
+          #core_toolbar {
+            color: black;
+            background-color: #F6F5F1;
+          }
+          #core_menu {
+            font-size: 16px;
+            color=red;
+          }
+          core-scaffold core-toolbar {
+            color: black;
+            background-color: #F6F5F1;
+          }
+          paper-item::shadow paper-ripple {
+            color:#34AADC;
+          }
+          #core_toolbar{
+            color:#34AADC;
+          }
+          .cont{
+            padding: 10%;
+            margin: auto;
+            position: absolute;
+            top: 0; left: 0; bottom: 0; right: 0;
+          }
+
+        </style>
+            <core-scaffold id="core_scaffold" responsiveWidth="1000px" >
+            <core-header-panel mode="seamed" id="core_header_panel" navigation flex>
+            <core-toolbar id="core_toolbar">
+              <p layout>Menu</p>
+            </core-toolbar>
+<core-menu selected="item" valueattr="id" selectedindex="0" id="core_menu" theme="core-light-theme">
+        
+  <paper-item id="timelinebtn" horizontal center layout onclick="trans(0);" >Timeline</paper-item>
+  <paper-item id="singlePlayerbtn" horizontal center layout onclick="trans(1);" >Single Player</paper-item>
+  <paper-item id="multiplayerbtn" horizontal center layout onclick="trans(2);">Multiplayer</paper-item>
+  <paper-item id="settingsbtn" horizontal center layout onclick="trans(3);">Settings</paper-item>
+  <paper-item id="profilebtn" horizontal center layout onclick="trans(4);">Profile</paper-item>
+                
+</core-menu>
+          </core-header-panel>   
+          <div id="div" tool center>Pilots</div>
+          <core-animated-pages transitions="slide-from-right">
+            <section>
+              <div layout vertical center center-justified style="background:red;">
+                <div>1</div>
+              </div>
+            </section>
+            <section>
+              <div layout vertical center center-justified style="background:blue;">
+                <div>2</div>
+              </div>
+            </section>
+            <section>
+              <div layout vertical center center-justified >
+                <div><my-multiplayer></my-multiplayer></div>
+              </div>
+            </section>
+            <section>
+              <div layout vertical center center-justified style="background:orange;">
+                <div>3</div>
+              </div>
+            </section>
+            <section>
+              <div layout vertical center>
+                <div><my-profile></my-profile></div>
+              </div>
+            </section>
+  </core-animated-pages>
+        
+        </core-scaffold>
+        
+    <script>
+    function trans(index) {
+      var p = document.querySelector('core-animated-pages');
+      var s =document.querySelector('core-scaffold');
+      s.togglePanel();
+      p.selected=index;
+    }
+   </script>
+        
+    </body>
+</html>

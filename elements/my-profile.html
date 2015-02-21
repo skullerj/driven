@@ -1,0 +1,93 @@
+<link rel="import" href="../bower_components/core-icons/core-icons.html">
+<link rel="import" href="../bower_components/core-icon/core-icon.html">
+<link rel="import" src="../bower_components/polymer/polymer.html"></link> 
+
+<polymer-element name="my-profile" attributes="user">
+
+  <template>
+    <style>    
+      :host {
+        position: sticky;
+        height: 70%;
+        width: 60%;  
+      }
+      p{
+        color: white;
+        
+      }
+      #core_icon {
+        left: 580px;
+        top: 160px;
+        position: absolute;
+      }
+         .big {
+    height: 32px;
+    width: 32px;
+        
+  }
+        .title{
+            color: black;
+        }
+        .titleDiv{
+            text-align: center;
+        }
+    </style>
+    <div id="div">
+      
+        <div center>
+          <div id="usuario"  >
+        
+          	<div flex class="titleDiv"><core-icon class="big" icon = "menu" ></core-icon>     <p class="title">Nombre del usuario</p></div>
+            <div flex>
+            <p>Especialidad 1</p>
+            <p>Especialidad 2</p>
+            <p>Especialidad 3</p></div>
+            
+          </div>
+          <div id="birthday" >
+            <div flex class="titleDiv" >Birthday</div>
+            <div flex>
+            <p>fecha de nacimineto</p>
+                        
+          </div>
+          </div>
+
+          <div id="born" >
+            <div flex class="titleDiv">Born</div>
+            <div flex>
+            <p>Lugar</p>
+                        
+          </div>
+          </div>
+            
+          <div id="studies" >
+              <div flex class="titleDiv">Studies</div>
+            <div flex>
+            <p>inst</p>
+                        
+          </div>
+          </div>
+         
+          <div id="location">
+              <div flex class="titleDiv">Location</div>
+            <div flex>
+            <p>Miami</p>
+                        
+          </div>
+          </div>
+
+
+        
+      </div>
+    </div>
+  </template>
+
+  <script>
+
+    Polymer({
+      
+    });
+
+  </script>
+
+</polymer-element>

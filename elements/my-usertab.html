@@ -1,0 +1,65 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../bower_components/core-icon/core-icon.html">
+<link rel="import" href="../bower_components/core-icons/core-icons.html">
+
+
+<polymer-element name="my-usertab" attributes="uid name score">
+  <template>
+    <style>    
+      :host {
+        width: 100%;
+        height: 70px;
+        display: block;
+        position: relative;
+        
+      }
+      paper-button{
+        background-color: #34AADC;
+      }
+    h5{
+        color: black;
+        align-content: center;
+    }
+    div{
+        margin-right: 10%;
+        margin-left: 10%;
+        background-color: white;
+        border-bottom: 5px;
+    }
+    core-icon{
+        color:{{color}};
+    }
+    </style>
+      <div horizontal layout>
+          <h5 flex>{{name}}</h5>
+          <h5 id="score" flex>{{score}}</h5>
+          <core-icon icon="grade" id="star"></core-icon>
+          <paper-button id="paper_button">Challenge</paper-button>   
+      </div>
+  </template>
+
+  <script>
+    
+    Polymer('my-usertab',{
+      ready: function() {
+        if(this.score>2000)
+            this.color= "#FFD600";
+          else {
+                if(this.score>1000)
+                    this.color= "#CFD8DC";
+                    
+                    else{
+                        this.color="#CD7F32";
+                    }
+                    }
+      },
+      challengeTapped: function(event,detail,sender){
+        this.fire('challenge-tap');
+      }
+        
+    });
+
+  </script>
+
+</polymer-element>

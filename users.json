@@ -1,0 +1,18 @@
+[
+  {
+    "uid": 1,
+    "name" : "Juan Rosero",
+    "score" : 1000
+  },
+  {
+    "uid": 2,
+    "name" : "Pablo Carpio",
+    "score" : 1000
+  },
+    {
+    "uid": 3,
+    "name" : "Alberto Contador",
+    "score" : 1000
+  }
+  
+]

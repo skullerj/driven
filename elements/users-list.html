@@ -1,0 +1,36 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="../web/users-service.html">
+<link rel="import" href="my-usertab.html">
+
+
+<polymer-element name="users-list">
+  <template>
+    <style>
+    :host {
+      display: block;
+      width: 100%;
+    }
+    </style>
+
+    <users-service posts={{posts}}></users-service>
+    
+    <div layout vertical center>
+      <template repeat="{{post in posts}}">               
+        <my-usertab uid="{{post.uid}}"
+                    on-challenge-tap="{{handleChallenge}}"
+                    name="{{post.name}}"
+                    score="{{post.score}}">
+        </my-usertab>
+      </template>
+    </div>
+  </template>
+
+  <script>
+  Polymer({
+    handleChallenge: function(event, detail, sender) {
+      var post = sender.templateInstance.model.post;
+      console.log("Challenge to:"+ post.uid );
+    }
+  });
+  </script>
+</polymer-element>
