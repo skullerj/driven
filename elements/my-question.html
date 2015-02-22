@@ -1,0 +1,86 @@
+
+<link rel="import" href="../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../bower_components/polymer/polymer.html">
+
+<polymer-element name="my-question" attributes="question">
+
+  <template>
+    <style>    
+      :host {
+        display: block;
+        box-sizing: border-box;
+      }
+      .paper_button {
+        height: 100px;
+        width: 38%;  
+        background-color: rgb(52, 170, 220);
+        margin: 5%; 
+        font-size: 16px;
+        font-family: sans-serif;
+      }
+    h3{
+        align-content: flex-start;
+        object-position: center;
+        text-align: center;
+        
+    }
+    </style>
+    <section id="section" wrap center-justified center>
+      <div flex layout><h3 >{{question.question}}</h3></div>      
+      <div id="div">
+        <paper-button id="{{ans1}}" class="paper_button" on-tap="{{answerTapped}}">{{question.answers[ans1]}}</paper-button>
+        <paper-button id="{{ans2}}" class="paper_button" on-tap="{{answerTapped}}">{{question.answers[ans2]}}</paper-button>
+        <paper-button id="{{ans3}}" class="paper_button" on-tap="{{answerTapped}}">{{question.answers[ans3]}}</paper-button>
+        <paper-button id="{{ans4}}" class="paper_button" on-tap="{{answerTapped}}">{{question.answers[ans4]}}</paper-button>
+      </div>
+    </section>
+  </template>
+
+  <script>
+
+    Polymer('my-question',{      
+        ready : function(){ 
+            var random= Math.floor((Math.random() * 4));
+            this.ans1=random;
+            random++;
+            if(random>3)
+                random=0;
+            this.ans2=random;
+            random++;
+            if(random>3)
+                random=0;
+            this.ans3=random;
+            random++;
+            if(random>3)
+                random=0;
+            this.ans4=random; 
+           
+        },
+        answerTapped : function(event,detail,sender){
+            
+            if(sender.id==3){
+                this.fire('questionRigth');
+            }else{               
+                this.fire('questionWrong');
+            }
+            var random= Math.floor((Math.random() * 4)); 
+            this.ans1=random;
+            random++;
+            if(random>3)
+                random=0;
+            this.ans2=random;
+            random++;
+            if(random>3)
+                random=0;
+            this.ans3=random;
+            random++;
+            if(random>3)
+                random=0;
+            this.ans4=random;    
+        }
+        
+    });
+
+  </script>
+
+</polymer-element>

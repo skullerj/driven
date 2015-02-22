@@ -1,0 +1,24 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="../bower_components/paper-button/paper-button.html">
+<link rel="import" href="/web/question-service.html">
+
+<polymer-element name="my-board" attributes="opponent question type">
+    <template>
+        <div><h3>{{resp}}</h3></div>
+        <paper-button on-tap="{{showQuestion}}">Play</paper-button>
+        <question-service post={{question}}></question-service>
+    </template>
+    <script>
+        Polymer('my-board',{
+        ready: function(){
+                
+                },
+                
+        showQuestion : function(){
+            this.resp="La categoria es:"+this.question.subject;
+            //hay que resolver como se va a enviar la pregunta a la pagina de preguntas
+            this.fire('questionRequested');
+        }
+        });
+    </script>
+</polymer-element>
