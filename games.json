@@ -1,0 +1,30 @@
+[{
+    "opponent":"Pablo Carpio",
+    "pScore":"3",
+    "oScore":"0",
+    "win":true
+},
+ {
+    "opponent":"Juan Rosero",
+    "pScore":"1",
+    "oScore":"1",
+    "win":null
+},
+ {
+    "opponent":"Alberto Tates",
+    "pScore":"2",
+    "oScore":"3",
+    "win":false
+},
+ {
+    "opponent":"Pablo Carpio",
+    "pScore":"3",
+    "oScore":"0",
+    "win":true
+},{
+    "opponent":"Pablo Carpio",
+    "pScore":"3",
+    "oScore":"0",
+    "win":true
+}
+]

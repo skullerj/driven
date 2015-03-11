@@ -1,24 +1,113 @@
 <link rel="import" href="../bower_components/polymer/polymer.html">
 <link rel="import" href="../bower_components/paper-button/paper-button.html">
-<link rel="import" href="/web/question-service.html">
+<link rel="import" href="../bower_components/core-animated-pages/core-animated-pages.html">
+<link rel="import" href="../web/questions-service.html">
 
 <polymer-element name="my-board" attributes="opponent question type">
-    <template>
-        <div><h3>{{resp}}</h3></div>
-        <paper-button on-tap="{{showQuestion}}">Play</paper-button>
-        <question-service post={{question}}></question-service>
+    <template >
+        
+<style> 
+
+    #container {
+      overflow: hidden;
+    }
+
+    #noscroll {
+      overflow-x: hidden;
+      overflow-y: auto;
+    }
+
+    .card {
+      height: 100px;
+      width: 38%;
+      font-size: 15px;
+      margin: 8px;
+      background-color: #34AADC;
+      border-radius: 4px;
+      text-align: center;
+    }
+
+    .view {
+     
+      text-align: center;
+      height: 400px;
+      font-size: 50px;
+      background-color: tomato;
+    }
+    .card span{
+        display: inline-block;
+        vertical-align: middle;
+    }
+
+  </style>
+<questions-service post={{question}}></questions-service>
+<div vertical layout >
+   <div flex>
+            <core-animated-pages id="pages" transitions="hero-transition"  flex selected="0" on-core-animated-pages-transition-end="{{transitionend}}" completed={{trans}}>
+              <section vertical layout >
+                <div fit hero-p>
+                    <div id="container" flex horizontal wrap around-justified layout cross-fade>
+                        <div class="card" hero-id="hero" hero?="{{question.subject=='Performance'}}" cross-fade><span>Performance</span></div>
+                        <div class="card" hero-id="hero" hero?="{{question.subject=='Airspace'}}" cross-fade><span>Airspace</span></div>
+                        <div class="card" hero-id="hero" hero?="{{question.subject=='Weather'}}" cross-fade><span>Weather</span></div>
+                        <div class="card" hero-id="hero" hero?="{{question.subject=='History'}}" cross-fade><span>History</span></div>
+                        <div class="card" hero-id="hero" hero?="{{question.subject=='Regulations'}}" cross-fade><span>Regulations</span></div>
+                        <div class="card" hero-id="hero" hero?="{{question.subject=='Aerodymanics'}}" cross-fade><span>Aerodynamics</span></div>
+
+
+                    </div>
+                    <div end horizontal layout center-justified center>
+                    
+                    <paper-button on-tap="{{showQuestion}}" flex >Play</paper-button>  
+                    
+                    </div>
+                   
+                </div>
+
+              </section>
+
+             <section flex>
+                <div class="view" vertical layout center center-justified hero-id="hero" hero >
+                    <div flex></div>
+                    <div center >{{question.subject}}</div>
+                    <div flex></div>
+                 </div>
+                </section>
+               </core-animated-pages>
+ 
+   
+    
+    </div>
+ </div>  
+
+       
     </template>
+    
     <script>
         Polymer('my-board',{
         ready: function(){
-                
-                },
-                
-        showQuestion : function(){
-            this.resp="La categoria es:"+this.question.subject;
-            //hay que resolver como se va a enviar la pregunta a la pagina de preguntas
-            this.fire('questionRequested');
+            this.$.pages.selected=0;
+             
+        },
+        transChanged:function(oldValue, newValue) {
+            if(this.$.pages.selected==0){
+                newValue=true;
+            }
+        },    
+        showQuestion : function(){           
+            this.$.pages.selected=1;
+            //this.$.pages.selected=0;
+        
+        },
+        transitionend : function(){
+         if(this.$.pages.selected==1){         
+             this.fire('questionRequested'); 
+             
+         }
+      
+            
         }
+        
         });
     </script>
 </polymer-element>

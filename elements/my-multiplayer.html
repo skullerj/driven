@@ -1,57 +1,17 @@
-<link rel="import" src="../bower_components/polymer/polymer.html"></link> 
-<link rel="import" src="../bower_components/paper-input/paper-input.html">
-</link>
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<polymer-element name="my-multiplayer" attributes="selectedOpponent">
 
-<link rel="import" src="../bower_components/core-icon/core-icon.html"></link> 
-<link rel="import" src="../bower_components/webcomponentsjs/webcomponents.js"></link> 
-<link rel="import" src="../bower_components/core-icons/core-icons.html"></link> 
-<link rel="import" src="../bower_components/core-toolbar/core-toolbar.html"></link> 
+  <template>
+      
+         
+  </template>
 
-<link rel="import" src="../bower_components/polymer/polymer.html"></link> 
- 
+  <script>
 
+    Polymer('my-multiplayer',{
+   
+    });
 
-<polymer-element name="my-multiplayer">
-    <template>
-        <style>
-            #div1{
-                
-            }
-            core-icon{
-                color: #34AADC;
-            }
-            paper-input{
-                color: #34AADC;
-            }
-            paper-input::shadow paper-input-decorator::shadow .focused-underline {
-               
-                background-color: #34AADC;
-            
-            }
-              paper-input::shadow paper-input-decorator[focused]::shadow .floated-label .label-text  {
-                
-                color: #34AADC;
-            }
-            #results{
-               margin-top: 20px;
-            }
-        </style> 
-        
-        <core-toolbar>
-            <core-icon icon="search"></core-icon>
-            <paper-input label="Buscar" floatingLabel flex></paper-input>
-        </core-toolbar>        
-        
-        <div id="results">
-        <users-list></users-list>
-        </div>
-                   
-    
-    </template>
-    <script>
-        Polymer({
-        
-        
-        });
-    </script>
+  </script>
+
 </polymer-element>

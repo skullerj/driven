@@ -3,14 +3,12 @@
         <head>
             <title></title>
             <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
-            <script src="bower_components/jquery-1.11.2.min.js"></script>
             <script src="bower_components/webcomponentsjs/webcomponents.js"></script>
-            <script src="js/pilots.js"></script>
             <link rel = "import" href = "elements.html">
             <style type = "text/css">
             </style>
         </head>
-    <body unresolved>
+    <body unresolved fullbleed>
         <style> 
                  html,body {
                     height: 100%;
@@ -44,7 +42,6 @@
           }
           #core_menu {
             font-size: 16px;
-            color=red;
           }
           core-scaffold core-toolbar {
             color: black;
@@ -71,9 +68,9 @@
             </core-toolbar>
 <core-menu selected="item" valueattr="id" selectedindex="0" id="core_menu" theme="core-light-theme">
         
-  <paper-item id="timelinebtn" horizontal center layout onclick="trans(0);" >Timeline</paper-item>
+  <paper-item id="timelinebtn" horizontal center layout onclick="trans(0);" >Multiplayer</paper-item>
   <paper-item id="singlePlayerbtn" horizontal center layout onclick="trans(1);" >Single Player</paper-item>
-  <paper-item id="multiplayerbtn" horizontal center layout onclick="trans(2);">Multiplayer</paper-item>
+  <paper-item id="multiplayerbtn" horizontal center layout onclick="trans(2);">Challenge</paper-item>
   <paper-item id="settingsbtn" horizontal center layout onclick="trans(3);">Settings</paper-item>
   <paper-item id="profilebtn" horizontal center layout onclick="trans(4);">Profile</paper-item>
                 
@@ -82,18 +79,18 @@
           <div id="div" tool center>Pilots</div>
           <core-animated-pages transitions="slide-from-right">
             <section>
-              <div layout vertical center center-justified style="background:red;">
-                <div>1</div>
+              <div layout hotizontal center center-justified >
+                <div><games-list></games-list></div>
               </div>
             </section>
             <section>
-              <div layout vertical center center-justified style="background:blue;">
-                <div>2</div>
+              <div vertical>
+                <div><my-board type="singlePlayer"></my-board></div>
               </div>
             </section>
             <section>
-              <div layout vertical center center-justified >
-                <div><my-multiplayer></my-multiplayer></div>
+              <div layout vertical center-justified >
+                <div><my-challenge><users-list></users-list></my-challenge></div>
               </div>
             </section>
             <section>
@@ -102,21 +99,53 @@
               </div>
             </section>
             <section>
-              <div layout vertical center>
+              <div layout center-justified>
                 <div><my-profile></my-profile></div>
               </div>
             </section>
-  </core-animated-pages>
+             <section>
+              <div center-justified>
+                <div><my-question question=null></my-question></div>
+              </div>
+            </section>  
+      </core-animated-pages>
         
         </core-scaffold>
         
     <script>
+    
+    var p = document.querySelector('core-animated-pages');    
+    var board = document.querySelector('my-board');
+    var questionPage = document.querySelector('my-question');
     function trans(index) {
-      var p = document.querySelector('core-animated-pages');
-      var s =document.querySelector('core-scaffold');
+      
+      var s=document.querySelector('core-scaffold');
       s.togglePanel();
       p.selected=index;
+      if(index==1){
+          questionPage.mode="singlePlayer"
+      }
     }
+   
+    board.addEventListener('questionRequested', function(){
+        questionPage.question=board.question;
+        board.$.pages.selected=0;
+        p.selected=5;       
+    })
+    questionPage.addEventListener('questionWrong',function(){
+        console.log("Respuesta incorrecta");
+        p.selected=1;
+    })
+    
+    questionPage.addEventListener('questionRigth',function(){
+        console.log("Respuest correcta");
+        p.selected=1;
+    })
+     questionPage.addEventListener('singlePlayerEnded',function(){
+        console.log("Respuest correcta");
+        p.selected=4; 
+    })
+        
    </script>
         
     </body>

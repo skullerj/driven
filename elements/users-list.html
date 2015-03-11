@@ -1,3 +1,4 @@
+
 <link rel="import" href="../bower_components/polymer/polymer.html">
 <link rel="import" href="../web/users-service.html">
 <link rel="import" href="my-usertab.html">
@@ -12,8 +13,7 @@
     }
     </style>
 
-    <users-service posts={{posts}}></users-service>
-    
+    <users-service posts={{posts}}></users-service>    
     <div layout vertical center>
       <template repeat="{{post in posts}}">               
         <my-usertab uid="{{post.uid}}"
@@ -26,10 +26,10 @@
   </template>
 
   <script>
-  Polymer({
-    handleChallenge: function(event, detail, sender) {
+  Polymer('users-list',{
+      handleChallenge: function(event, detail, sender) {
       var post = sender.templateInstance.model.post;
-      console.log("Challenge to:"+ post.uid );
+      console.log("Challenge to:"+ post.uid);
     }
   });
   </script>

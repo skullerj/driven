@@ -2,7 +2,7 @@
 <link rel="import" href="../bower_components/paper-button/paper-button.html">
 <link rel="import" href="../bower_components/polymer/polymer.html">
 
-<polymer-element name="my-question" attributes="question">
+<polymer-element name="my-question" attributes="question mode lifes">
 
   <template>
     <style>    
@@ -40,6 +40,7 @@
 
     Polymer('my-question',{      
         ready : function(){ 
+            this.lifes=3;
             var random= Math.floor((Math.random() * 4));
             this.ans1=random;
             random++;
@@ -59,9 +60,19 @@
         answerTapped : function(event,detail,sender){
             
             if(sender.id==3){
+                
                 this.fire('questionRigth');
-            }else{               
-                this.fire('questionWrong');
+            }else{
+                if(this.mode=="singlePlayer"){
+                this.lifes--;
+                if(this.lifes<1){
+                    this.lifes=3;
+                    return this.fire('singlePlayerEnded');               
+                }else{
+                    this.fire('questionWrong');
+                }
+                }
+                
             }
             var random= Math.floor((Math.random() * 4)); 
             this.ans1=random;

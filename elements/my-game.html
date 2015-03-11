@@ -1,0 +1,54 @@
+<link rel="import" href="../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../bower_components/core-icons/core-icons.html">
+<link rel="import" href="../bower_components/core-icon/core-icon.html">
+<link rel="import" href="../bower_components/polymer/polymer.html">
+
+
+<polymer-element name="my-game" attributes="opponentName score win">
+
+  <template>
+    <style>    
+      :host {
+        width: 60%;
+        height: 25px;
+        box-sizing: border-box;
+      }
+      #paper_button {
+        
+    
+      }
+      #core_icon {
+       
+        
+      }
+        .oponentName{
+            
+        }
+    </style>
+    <section horizontal layout center-justified >
+      <div flex>{{opponentName}}</div>
+      <div >{{score}}</div>
+      <div ><core-icon icon="{{icon}}" id="core_icon" ></core-icon></div>
+      <div ><paper-button id="paper_button" hidden?={{win!=null}} on-tap={{playTapped}}>Play</paper-button></div>
+    </section>
+    
+    
+  </template>
+
+  <script>
+
+    Polymer('my-game',{
+      ready: function(){
+          this.icon="search";
+          if(this.win){this.icon="done";
+                            }else{ if(this.win===false){this.icon="close";}}
+          
+      },
+      playTapped : function(event , detail,sender){
+            this.fire('play-tap');
+      }
+    });
+
+  </script>
+
+</polymer-element>

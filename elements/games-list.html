@@ -1,0 +1,48 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="../web/games-service.html">
+<link rel="import" href="my-game.html">
+
+
+
+<polymer-element name="games-list" attributes="selectedOpponent">
+
+  <template>
+      <style>
+        my-game{
+            border-bottom: 30px;
+        }
+      </style>
+      
+      <games-service posts="{{posts}}"></games-service>
+      <div vertical layout>
+         <div><h3>Curent Games</h3></div>
+          <div><template repeat="{{post in posts}}">
+                <my-game hidden?={{post.win!=null}} opponentName="{{post.opponent}}" score="                            {{post.pScore}} - {{post.oScore}}" win={{post.win}} on-play-tap={{handdlePlay}} >                 </my-game>
+            </template>
+          
+        </div>
+        <div><h3>Finished Games</h3></div>
+        <div><template repeat="{{post in posts}}">
+                <my-game hidden?={{post.win==null}} opponentName="{{post.opponent}}" score="                            {{post.pScore}} - {{post.oScore}}" win={{post.win}} ></my-game>
+            </template>
+          
+        </div>
+ 
+      
+      </div>
+         
+  </template>
+
+  <script>
+
+    Polymer('games-list',{
+      handdlePlay : function(event,detail,sender){
+        var post = sender.templateInstance.model.post;
+        this.selectedOpponent=post.opponent;
+        this.fire('game-requested');
+      }
+    });
+
+  </script>
+
+</polymer-element>

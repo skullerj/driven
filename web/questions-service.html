@@ -1,6 +1,6 @@
 <link rel="import" href="../bower_components/polymer/polymer.html">
 <link rel="import" href="../bower_components/core-ajax/core-ajax.html">
-<polymer-element name="users-service" attributes="posts">
+<polymer-element name="questions-service" attributes="post">
   <template>
     <style>
     :host {
@@ -9,19 +9,19 @@
     </style>
     <core-ajax id="ajax"
       auto
-      url="http://localhost:1337/users"
+      url="../question.json"
       on-core-response="{{postsLoaded}}"
       handleAs="json">
     </core-ajax>
   </template>
   <script>
-  Polymer('users-service', {
+  Polymer('questions-service', {
     created: function() {
-      this.posts = [];
+      this.post = null;
     },
     postsLoaded: function() {
       // Make a copy of the loaded data
-      this.posts = this.$.ajax.response.slice(0);
+      this.post = this.$.ajax.response;
     }
     /** 
      * Update the service with the current favorite value.
