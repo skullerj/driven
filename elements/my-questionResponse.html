@@ -1,0 +1,31 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<polymer-element name="my-questionResponse" attributes="message win">
+
+  <template layout vertical fullbleed>
+    <style>    
+      :host {
+        width: 100%;
+        height: 100%;
+        box-sizing: border-box;
+        position: absolute;
+        
+      }
+      #win{
+      	background-color: rgb(52, 170, 220);
+      }
+      #loose{
+      	background-color: orange;
+      }
+    </style>
+    <div id="{{win}}" one flex>{{ message }}</div>
+  </template>
+
+  <script>
+
+    Polymer({
+  
+    });
+
+  </script>
+
+</polymer-element>

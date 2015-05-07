@@ -40,21 +40,27 @@
     }
 
   </style>
-<questions-service post={{question}}></questions-service>
+<questions-service post={{question}} id="questionSource"></questions-service>
 <div vertical layout >
    <div flex>
             <core-animated-pages id="pages" transitions="hero-transition"  flex selected="0" on-core-animated-pages-transition-end="{{transitionend}}" completed={{trans}}>
               <section vertical layout >
                 <div fit hero-p>
                     <div id="container" flex horizontal wrap around-justified layout cross-fade>
-                        <div class="card" hero-id="hero" hero?="{{question.subject=='Performance'}}" cross-fade><span>Performance</span></div>
-                        <div class="card" hero-id="hero" hero?="{{question.subject=='Airspace'}}" cross-fade><span>Airspace</span></div>
-                        <div class="card" hero-id="hero" hero?="{{question.subject=='Weather'}}" cross-fade><span>Weather</span></div>
-                        <div class="card" hero-id="hero" hero?="{{question.subject=='History'}}" cross-fade><span>History</span></div>
-                        <div class="card" hero-id="hero" hero?="{{question.subject=='Regulations'}}" cross-fade><span>Regulations</span></div>
-                        <div class="card" hero-id="hero" hero?="{{question.subject=='Aerodymanics'}}" cross-fade><span>Aerodynamics</span></div>
-
-
+                       <!--  the subjects here are treated as numbers
+                        each one has one number 
+                        Performance : 1
+                        Aerodynamics : 2
+                        Airspace : 3 
+                        Regulations : 4
+                        Weather : 5
+                        History: 6 -->
+                        <div class="card" hero-id="hero" hero?="{{question.subject===1}}" cross-fade><span>Performance</span></div>
+                        <div class="card" hero-id="hero" hero?="{{question.subject===3}}" cross-fade><span>Airspace</span></div>
+                        <div class="card" hero-id="hero" hero?="{{question.subject===5}}" cross-fade><span>Weather</span></div>
+                        <div class="card" hero-id="hero" hero?="{{question.subject===6}}" cross-fade><span>History</span></div>
+                        <div class="card" hero-id="hero" hero?="{{question.subject===4}}" cross-fade><span>Regulations</span></div>
+                        <div class="card" hero-id="hero" hero?="{{question.subject===2}}" cross-fade><span>Aerodynamics</span></div>
                     </div>
                     <div end horizontal layout center-justified center>
                     
@@ -69,7 +75,7 @@
              <section flex>
                 <div class="view" vertical layout center center-justified hero-id="hero" hero >
                     <div flex></div>
-                    <div center >{{question.subject}}</div>
+                    <div center >{{subjectBig}}</div>
                     <div flex></div>
                  </div>
                 </section>
@@ -84,30 +90,45 @@
     </template>
     
     <script>
+        //Set the initial page to 0
         Polymer('my-board',{
         ready: function(){
             this.$.pages.selected=0;
              
         },
-        transChanged:function(oldValue, newValue) {
-            if(this.$.pages.selected==0){
-                newValue=true;
-            }
-        },    
+        //Make the transition happen
         showQuestion : function(){           
+            switch(this.question.subject){
+              case 1:
+                this.subjectBig="Performance";
+              break;
+              case 2:
+                this.subjectBig="Aerodynamics";
+              break;
+              case 3:
+                this.subjectBig="Airspace";
+              break;
+              case 4:
+                this.subjectBig="Regulations";
+              break;
+              case 5:
+                this.subjectBig="Weather";
+              break;
+              case 6:
+                this.subjectBig="History";
+              break;
+            }
             this.$.pages.selected=1;
             //this.$.pages.selected=0;
         
         },
+        //Fire the event when transition ended
         transitionend : function(){
          if(this.$.pages.selected==1){         
-             this.fire('questionRequested'); 
-             
-         }
-      
-            
+             this.$.questionSource.$.ajax.go();
+             this.fire('questionRequested');              
         }
-        
+        }
         });
     </script>
 </polymer-element>

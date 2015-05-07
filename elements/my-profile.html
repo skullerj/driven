@@ -7,13 +7,13 @@
   <template>
     <style>    
       :host {
-        position: sticky;
+        position: absolute;
         height: 70%;
         width: 60%;
         background-color: orange;
       }
       p{
-        color: white;
+            color:#34AADC;
         
       }
       #core_icon {
@@ -22,8 +22,8 @@
         position: absolute;
       }
          .big {
-    height: 32px;
-    width: 32px;
+    height: 60px;
+    width: 60px;
         
   }
         .title{
@@ -38,11 +38,11 @@
         <div >
           <div id="usuario"  >
         
-          	<div flex class="titleDiv"><core-icon class="big" icon = "menu" ></core-icon>     <p class="title">Nombre del usuario</p></div>
+          <div flex class="titleDiv"><core-icon class="big" src="{{'http://graph.facebook.com/'+ user.id +'/picture?type=large'}}"></core-  icon>    </div>
             <div flex>
+            <div center class="titleDiv">{{user.first_name}} {{user.last_name}}</div>  
             <p>Especialidad 1</p>
-            <p>Especialidad 2</p>
-            <p>Especialidad 3</p></div>
+            </div>
             
           </div>
           <div id="birthday" >
@@ -76,7 +76,10 @@
                         
           </div>
           </div>
+      <div>
+          <content select="paper-button"></content>
 
+      </div>
 
         
       </div>

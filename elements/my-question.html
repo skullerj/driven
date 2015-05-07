@@ -27,11 +27,15 @@
     </style>
     <section id="section" wrap center-justified center>
       <div flex layout><h3 >{{question.question}}</h3></div>      
+      <div flex layout>{{count}}</div>
+      <div flex layout>{{lifes}}</div>
+      <div flex layout hidden?="{{mode=='singlePlayer'}}">{{score}}</div>
+
+
       <div id="div">
         <paper-button id="{{ans1}}" class="paper_button" on-tap="{{answerTapped}}">{{question.answers[ans1]}}</paper-button>
         <paper-button id="{{ans2}}" class="paper_button" on-tap="{{answerTapped}}">{{question.answers[ans2]}}</paper-button>
         <paper-button id="{{ans3}}" class="paper_button" on-tap="{{answerTapped}}">{{question.answers[ans3]}}</paper-button>
-        <paper-button id="{{ans4}}" class="paper_button" on-tap="{{answerTapped}}">{{question.answers[ans4]}}</paper-button>
       </div>
     </section>
   </template>
@@ -41,27 +45,26 @@
     Polymer('my-question',{      
         ready : function(){ 
             this.lifes=3;
-            var random= Math.floor((Math.random() * 4));
+            this.score=0;
+            var random= Math.floor((Math.random() * 3));
             this.ans1=random;
             random++;
-            if(random>3)
+            if(random>2)
                 random=0;
             this.ans2=random;
             random++;
-            if(random>3)
+            if(random>2)
                 random=0;
-            this.ans3=random;
-            random++;
-            if(random>3)
-                random=0;
-            this.ans4=random; 
+            this.ans3=random; 
            
         },
         answerTapped : function(event,detail,sender){
-            
-            if(sender.id==3){
-                
+            this.count=(-1);
+            if(sender.id==2){              
                 this.fire('questionRigth');
+                if(this.mode=="singlePlayer"){
+                    this.score+=100;      
+                }
             }else{
                 if(this.mode=="singlePlayer"){
                 this.lifes--;
@@ -74,21 +77,34 @@
                 }
                 
             }
-            var random= Math.floor((Math.random() * 4)); 
+            var random= Math.floor((Math.random() * 3));
             this.ans1=random;
             random++;
-            if(random>3)
+            if(random>2)
                 random=0;
             this.ans2=random;
             random++;
-            if(random>3)
+            if(random>2)
                 random=0;
-            this.ans3=random;
-            random++;
-            if(random>3)
-                random=0;
-            this.ans4=random;    
+            this.ans3=random;    
+        },
+        countDown : function(){
+            this.count--;
+            if(this.count>0){
+                this.async(this.countDown, null, 1000);  
+            }
+            if(this.count==0){ 
+                if(this.lifes>0){
+                    this.lifes--;
+                    this.fire('outOfTime');
+                }else{
+                    this.fire('singlePlayerEnded');
+                }
+                
+            }
         }
+
+        
         
     });
 

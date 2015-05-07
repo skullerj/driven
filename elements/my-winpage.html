@@ -1,0 +1,37 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="../bower_components/paper-button/paper-button.html">
+
+<polymer-element name="my-winpage" attributes="score mode">
+
+  <template>
+    <style>    
+      :host {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        box-sizing: border-box;
+        background-color: rgb(52, 170, 220);
+      }
+      #paper_button {
+        left: 20px;
+        top: 60px;
+        position: absolute;
+      }
+    </style>
+    <div>Esta es la pantalla para ganar</div>
+    <div>{{ score }}</div>
+    <paper-button id="returnbtn" on-tap="{{returnTapped}}">Return</paper-button>
+  </template>
+
+  <script>
+
+    Polymer('my-winpage',{
+      returnTapped : function(){
+        this.fire('returnTapped');
+      }
+      
+    });
+
+  </script>
+
+</polymer-element>

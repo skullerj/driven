@@ -1,0 +1,21 @@
+<polymer-element name="my-facebookLogin" attributes="">
+	<template>
+		<style>
+			:host {
+				display: block;
+			}
+		</style>
+	<h1>Facebook SDK login con Javascript</h1>
+
+	<fb:login-button scope="public_profile,email" onlogin="checkLoginState();">
+	</fb:login-button>
+
+	<div id="status">
+
+	</template>
+	<script>
+		Polymer({
+			
+		});
+	</script>
+</polymer-element>

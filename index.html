@@ -4,13 +4,15 @@
             <title></title>
             <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
             <script src="bower_components/webcomponentsjs/webcomponents.js"></script>
+            <script src="bower_components/jquery-1.11.2.min.js"></script>
+           
             <link rel = "import" href = "elements.html">
             <style type = "text/css">
             </style>
         </head>
     <body unresolved fullbleed>
         <style> 
-                 html,body {
+                html,body {
                     height: 100%;
                     margin: 0;
                     background-color: #E5E5E5;
@@ -32,7 +34,9 @@
             color:black;
             background-color: white;
           }
-
+          core-pages{
+            height: 100%;
+          }  
           #core_header_panel {
             background-color: #F6F5F1;
           }
@@ -61,92 +65,86 @@
           }
 
         </style>
-            <core-scaffold id="core_scaffold" responsiveWidth="1000px" >
-            <core-header-panel mode="seamed" id="core_header_panel" navigation flex>
-            <core-toolbar id="core_toolbar">
-              <p layout>Menu</p>
-            </core-toolbar>
-<core-menu selected="item" valueattr="id" selectedindex="0" id="core_menu" theme="core-light-theme">
-        
-  <paper-item id="timelinebtn" horizontal center layout onclick="trans(0);" >Multiplayer</paper-item>
-  <paper-item id="singlePlayerbtn" horizontal center layout onclick="trans(1);" >Single Player</paper-item>
-  <paper-item id="multiplayerbtn" horizontal center layout onclick="trans(2);">Challenge</paper-item>
-  <paper-item id="settingsbtn" horizontal center layout onclick="trans(3);">Settings</paper-item>
-  <paper-item id="profilebtn" horizontal center layout onclick="trans(4);">Profile</paper-item>
-                
-</core-menu>
-          </core-header-panel>   
-          <div id="div" tool center>Pilots</div>
-          <core-animated-pages transitions="slide-from-right">
-            <section>
-              <div layout hotizontal center center-justified >
-                <div><games-list></games-list></div>
-              </div>
-            </section>
-            <section>
-              <div vertical>
-                <div><my-board type="singlePlayer"></my-board></div>
-              </div>
-            </section>
-            <section>
-              <div layout vertical center-justified >
-                <div><my-challenge><users-list></users-list></my-challenge></div>
-              </div>
-            </section>
-            <section>
-              <div layout vertical center center-justified style="background:orange;">
-                <div>3</div>
-              </div>
-            </section>
-            <section>
-              <div layout center-justified>
-                <div><my-profile></my-profile></div>
-              </div>
-            </section>
-             <section>
-              <div center-justified>
-                <div><my-question question=null></my-question></div>
-              </div>
-            </section>  
-      </core-animated-pages>
+
+
+ <core-pages selected="1" >
+  <section> 
+
+       <core-scaffold id="core_scaffold" responsiveWidth="1000px" >
+              <core-header-panel mode="seamed" id="core_header_panel" navigation flex>
+               <core-toolbar id="core_toolbar">
+               <p layout>Menu</p>
+              </core-toolbar>
+              <core-menu selected="item" valueattr="id" selectedindex="0" id="core_menu" theme="core-light-theme">
+               <paper-item id="timelinebtn" horizontal center layout onclick="trans(0);" >Multiplayer</paper-item>
+               <paper-item id="singlePlayerbtn" horizontal center layout onclick="trans(1);" >Single Player</paper-item>
+               <paper-item id="multiplayerbtn" horizontal center layout onclick="trans(2);">Challenge</paper-item>
+               <paper-item id="settingsbtn" horizontal center layout onclick="trans(3);">Settings</paper-item>
+               <paper-item id="profilebtn" horizontal center layout onclick="trans(4);">Profile</paper-item>           
+              </core-menu>
+              </core-header-panel>   
+          
+              <div id="div" tool center>Pilots</div>
+                 <core-animated-pages transitions="slide-from-right" selected='4'>
+                    <section>
+                      <div layout hotizontal center center-justified >
+                        <div><games-list></games-list></div>
+                      </div>
+                    </section>
+                    <section>
+                      <div vertical>
+                        <div><my-board type="singlePlayer"></my-board></div>
+                      </div>
+                    </section>
+                    <section>
+                      <div layout vertical center-justified >
+                        <div><my-challenge><users-list></users-list></my-challenge></div>
+                      </div>
+                    </section>
+                    <section>
+                      <div layout vertical center center-justified style="background:orange;">
+                        <div>3</div>
+                      </div>
+                    </section>
+                    <section>
+                      <div layout center-justified>
+                        <div><my-profile>
+                                <paper-button raised onclick="logOut();">LogOut</paper-button>
+                             </my-profile>
+                         </div>
+                      </div>
+                    </section>
+                     <section>
+                      <div center-justified>
+                        <div><my-question question=null></my-question></div>
+                      </div>
+                    </section>
+                     <section>
+                      <div center-justified>
+                        <div> <my-winpage></my-winpage> </div>
+                      </div>
+                    </section>
+                    <section>
+                      <div center-justified>
+                        <div><my-questionResponse></my-questionResponse> </div>
+                      </div>
+                    </section>   
+                </core-animated-pages>
         
         </core-scaffold>
-        
-    <script>
-    
-    var p = document.querySelector('core-animated-pages');    
-    var board = document.querySelector('my-board');
-    var questionPage = document.querySelector('my-question');
-    function trans(index) {
-      
-      var s=document.querySelector('core-scaffold');
-      s.togglePanel();
-      p.selected=index;
-      if(index==1){
-          questionPage.mode="singlePlayer"
-      }
-    }
-   
-    board.addEventListener('questionRequested', function(){
-        questionPage.question=board.question;
-        board.$.pages.selected=0;
-        p.selected=5;       
-    })
-    questionPage.addEventListener('questionWrong',function(){
-        console.log("Respuesta incorrecta");
-        p.selected=1;
-    })
-    
-    questionPage.addEventListener('questionRigth',function(){
-        console.log("Respuest correcta");
-        p.selected=1;
-    })
-     questionPage.addEventListener('singlePlayerEnded',function(){
-        console.log("Respuest correcta");
-        p.selected=4; 
-    })
-        
-   </script>
+  </section>
+             
+           <section> 
+              <h1>Facebook SDK login con Javascript</h1>
+
+              <fb:login-button scope="public_profile,email" onlogin="checkLoginState();">
+              </fb:login-button>
+            </section>
+           <section>seccion 3</section>
+  </core-pages>   
+ 
+
+     <script src="js/mainScript.js"></script>
         
     </body>
 </html>
